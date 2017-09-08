@@ -7,42 +7,51 @@
  */
 
 /**
- * Description of Student
+ * Our student class, contains basic information about a student such as grades,
+ * names, and email.
+ * 
+ * Also contains methods to calculate the students average as well as convert 
+ * all the information to a readable string format.
  *
  * @author Paul
  */
 class Student {
-    //put your code here
-    
+
+    //Constructor; initializes all information but does not provide info
     function __construct() {
-    $this->surname = '';
-    $this->first_name = '';
-    $this->emails = array();
-    $this->grades = array();
-}
+        $this->surname = '';
+        $this->first_name = '';
+        $this->emails = array();
+        $this->grades = array();
+    }
 
-function add_email($which,$address) {
-    $this->emails[$which] = $address;
-}
+    //Adds an email to the student using provided parameters
+    function add_email($which, $address) {
+        $this->emails[$which] = $address;
+    }
+    
+    //Adds a grade to the student using provided parameters
+    function add_grade($grade) {
+        $this->grades[] = $grade;
+    }
 
-function add_grade($grade) {
-    $this->grades[] = $grade;
-}
+    //Calclates and returs the average of all the current grades
+    function average() {
+        $total = 0;
+        foreach ($this->grades as $value)
+            $total += $value;
+        return $total / count($this->grades);
+    }
 
-function average() {
-    $total = 0;
-    foreach ($this->grades as $value)
-        $total += $value;
-    return $total / count($this->grades);
-}
-
-function toString() {
-    $result = $this->first_name . ' ' . $this->surname;
-    $result .= ' ('.$this->average().")\n";
-    foreach($this->emails as $which=>$what)
-        $result .= $which . ': '. $what. "\n";
-    $result .= "\n";
-    return '<pre>'.$result.'</pre>';
-}
+    //Returns the first and last name as well as the emails of the student in a
+    //readable string format
+    function toString() {
+        $result = $this->first_name . ' ' . $this->surname;
+        $result .= ' (' . $this->average() . ")\n";
+        foreach ($this->emails as $which => $what)
+            $result .= $which . ': ' . $what . "\n";
+        $result .= "\n";
+        return '<pre>' . $result . '</pre>';
+    }
 
 }
